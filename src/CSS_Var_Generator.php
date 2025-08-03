@@ -13,11 +13,11 @@ class CSS_Var_Generator {
 		self::$instances[ $identifier ] = $this;
 	}
 
-	public function addVar( string $key, string $value ): void {
+	public function add_var( string $key, string $value ): void {
 		$this->vars[ $key ] = $value;
 	}
 
-	public function getCss(): string {
+	public function get_css(): string {
 		if ( empty( $this->vars ) ) {
 			return '';
 		}
@@ -25,7 +25,7 @@ class CSS_Var_Generator {
 		$css = ":root {\n";
 		foreach ( $this->vars as $key => $value ) {
 			$finalKey   = $this->prefix ? "{$this->prefix}_{$key}" : $key;
-			$finalValue = $this->resolveVarReferences( $value );
+			$finalValue = $this->resolve_var_references( $value );
 			$css .= "  --{$finalKey}: {$finalValue};\n";
 		}
 		$css .= "}\n";
@@ -33,7 +33,7 @@ class CSS_Var_Generator {
 		return $css;
 	}
 
-	protected function resolveVarReferences( string $value ): string {
+	protected function resolve_var_references( string $value ): string {
 		return preg_replace_callback( '/var\(([\w\-]+)\)/', function ( $matches ) {
 			$refKey = $matches[1];
 
@@ -46,7 +46,7 @@ class CSS_Var_Generator {
 		}, $value );
 	}
 
-	public static function getInstance( string $identifier ): ?self {
+	public static function get_instance( string $identifier ): ?self {
 		return self::$instances[ $identifier ] ?? null;
 	}
 }
