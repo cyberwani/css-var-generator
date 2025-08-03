@@ -1,0 +1,12 @@
+{
+  "name": "cyberwani/css-var-generator",
+  "description": "A PHP class for managing CSS variables dynamically with optional prefixing.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Cyberwani\\": "src/"
+    }
+  },
+  "require": {}
+}
